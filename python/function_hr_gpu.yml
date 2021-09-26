@@ -1,0 +1,23 @@
+  #fname#:
+    lang: cldz_#dockerimage#_gpu
+    handler: ./#fname#
+    image: clouderizer/cldz_baseimage:hotstart-#dockerimage#-gpu
+    secrets:
+      - dockerhub
+      - gcrio
+    limits:
+        nvidia.com/gpu: #gpu_limit#
+        memory: #memory_limit#
+        cpu: #cpu_limit#
+    requests:
+        memory: #memory_request#
+        cpu: #cpu_request#
+    environment_file:
+      - env_hr.yaml
+    labels:
+        com.openfaas.scale.zero: true
+    annotations:
+        com.openfaas.profile: withgpu
+        com.openfaas.health.http.path: "/cldzpodhealthcheck"
+        com.openfaas.health.http.initialDelay: "10s"
+        prometheus_labels: #infratype#

@@ -1,0 +1,30 @@
+  #fname#:
+    lang: cldz_#dockerimage#
+    handler: ./#fname#
+    image: clouderizer/cldz_baseimage:hotstart-#dockerimage#
+    secrets:
+      - dockerhub
+      - gcrio
+    limits:
+        memory: #memory_limit#
+        cpu: #cpu_limit#
+    requests:
+        memory: #memory_request#
+        cpu: #cpu_request#
+    environment:
+        read_timeout: #timeout#
+        write_timeout: #timeout#
+        exec_timeout: #timeout#
+        company: #company#
+        server_url: #server_url#
+        servingproject: #servingproject#
+        fn_model_path: #fn_model_path#
+        fn_preprocess_script_path: #fn_preprocess_script_path#
+        fn_postprocess_script_path: #fn_postprocess_script_path#
+        fn_predict_script_path: #fn_predict_script_path#
+    labels:
+        com.openfaas.scale.zero: true
+    annotations:
+        com.openfaas.health.http.path: "/cldzpodhealthcheck"
+        com.openfaas.health.http.initialDelay: "10s"
+        prometheus_labels: #infratype#

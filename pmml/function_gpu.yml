@@ -1,0 +1,18 @@
+  #fname#:
+    lang: cldz_java11
+    handler: ./#fname#
+    image: #registryname#:latest
+    secrets:
+      - dockerhub
+      - gcrio
+    limits:
+        nvidia.com/gpu: #gpu_limit#
+    environment:
+        read_timeout: 5m
+        write_timeout: 5m
+        exec_timeout: 5m
+    annotations:
+        com.openfaas.profile: withgpu
+        com.openfaas.health.http.path: "/cldzpodhealthcheck"
+        com.openfaas.health.http.initialDelay: "10s"
+        prometheus_labels: #infratype#

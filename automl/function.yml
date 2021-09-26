@@ -1,0 +1,21 @@
+  #fname#:
+    lang: cldz_#dockerimage#java11
+    handler: ./#fname#
+    image: #registryname#:latest
+    secrets:
+      - dockerhub
+      - gcrio
+    limits:
+        memory: #memory_limit#
+        cpu: #cpu_limit#
+    requests:
+        memory: #memory_request#
+        cpu: #cpu_request#
+    environment_file:
+      - env.yaml
+    labels:
+        com.openfaas.scale.zero: true
+    annotations:
+        com.openfaas.health.http.path: "/cldzpodhealthcheck"
+        com.openfaas.health.http.initialDelay: "10s"
+        prometheus_label: #infratype#
